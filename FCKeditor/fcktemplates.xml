@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<Templates imagesBasePath="fck_template/images/">
+	<Template title="Основен шаблон">
+		<Description>Заглавие, подзаглавие, хоризонтална линия, дата и текст</Description>
+		<Html>
+			<![CDATA[
+				<h1>Заглавие</h1><h4>Подзаглавие</h4><hr /><br /><font color='#ff6100'>Дата</font> Текст на статия / ревю
+			]]>
+		</Html>
+	</Template>
+</Templates>

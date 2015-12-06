@@ -1,0 +1,133 @@
+/*
+//--------------------------------------------------------
+//
+// ReqHeap
+// Version: 1.0
+//
+// Copyright, GnostX GmbH, Bern info(at)gnostx.ch, 2007
+//
+// Programmed by i-nature.com
+//
+//--------------------------------------------------------
+*/
+
+body {
+	font 		: normal 12px Arial, Verdana;
+	color      	: #000;
+	margin     	: 10px 10px 10px 10px;
+	padding    	: 0px;
+	background-color: #E1E4ED;
+}
+body.print {
+	font 		: normal 12px Arial, Verdana;
+	color      	: #000;
+	margin     	: 10px 10px 10px 10px;
+	padding    	: 0px;
+	background-color: #FFFFFF;
+}
+table.main{
+	align		: center;
+	border		: 1px solid #000000;
+	background-color: #FFFFFF;
+}
+table.topMenu{
+	align		: left;
+	border		: 1px solid #000000;
+	background-color: #C2D5FC;
+}
+table.content{ 
+	width		: 100%; 
+	border		: solid 1px #000000;
+}
+td{
+	font 		: normal 12px Arial, Verdana;
+	color		: #000000;
+}
+tr.blue{
+	color		: #000000;
+	background-color: #C2D5FC;
+}
+tr.light_blue{
+	color		: #000000;
+	background-color: #DBE7FE;
+}
+tr.gray{
+	color		: #000000;
+	background-color: #F2F1F1;
+}
+tr.red{
+	color		: #000000;
+	background-color: #FCBABA;
+}
+tr.violet{
+	color		: #000000;
+	background-color: #E4BDD0;
+}
+tr.green{
+	color		: #000000;
+	background-color: #B6EAD9;
+}
+tr.orange{
+	color		: #000000;
+	background-color: #FCE1BA;
+}
+tr.yellow{
+	color		: #000000;
+	background-color: #D1EAB6;
+}
+td.blue{
+	color		: #000000;
+	background-color: #C2D5FC;
+}
+td.light_blue{
+	color		: #000000;
+	background-color: #DBE7FE;
+}
+td.gray{
+	color		: #000000;
+	background-color: #F2F1F1;
+}
+td.red{
+	color		: #000000;
+	background-color: #FCBABA;
+}
+td.violet{
+	color		: #000000;
+	background-color: #E4BDD0;
+}
+td.green{
+	color		: #000000;
+	background-color: #B6EAD9;
+}
+td.yellow{
+	color		: #000000;
+	background-color: #D1EAB6;
+}
+td.orange{
+	color		: #000000;
+	background-color: #FCE1BA;
+}
+a, a:link, a:active, a:visited { 
+	font		: normal 12px Arial, Verdana; 
+	color		: #194EBC; 
+	text-decoration: underline;
+	vertical-align: middle;
+}
+a:hover	{
+	text-decoration: underline;
+}
+a.footer, a.footer:link, a.footer:active, a.footer:visited {
+	font		: 11px;
+}
+form{
+	display		: inline;
+}
+input, input.checkbox, input.radio , select, textarea{
+	font 		: normal 11px Arial, Verdana;
+	color		: #000;
+	border		: 1px solid #000;
+	background 	: #fff;
+}
+.error{
+	color		: #E75050;
+}

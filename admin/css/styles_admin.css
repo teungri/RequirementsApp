@@ -1,0 +1,120 @@
+/*
+//--------------------------------------------------------
+//
+// ReqHeap
+// Version: 1.0
+//
+// Copyright, GnostX GmbH, Bern info(at)gnostx.ch, 2007
+//
+// Programmed by i-nature.com
+//
+//--------------------------------------------------------
+*/
+
+td {
+font-family: arial, verdana,  helvetica, sans-serif;
+font-size:12px;
+color:black;
+border:1px solid white; 
+font-weight: normal;
+}
+
+.td_no_border {
+font-family: arial, verdana,  helvetica, sans-serif;
+font-size:12px;
+border:0px; 
+color:black;
+font-weight: normal;
+}
+
+.tables_title {
+font-family: arial, verdana,  helvetica, sans-serif;
+font-size:13px;
+border:0px; 
+color:black;
+font-weight: normal;
+}
+
+.tables_title2 {
+font-family: arial, verdana,  helvetica, sans-serif;
+font-size:13px;
+border:0px; 
+color:#5B858D;
+font-weight: normal;
+}
+
+table{
+font-family: arial, verdana,  helvetica, sans-serif;
+font-size:13px;
+border:1px thin white; 
+font-weight: normal;
+}
+
+a {
+font-family: arial, verdana,  helvetica, sans-serif;
+font-size:12px;
+color:black;
+font-weight: normal;
+text-decoration:none;
+}
+
+input {
+font-family: arial, verdana,  helvetica, sans-serif;
+font-size:10px;
+color:black;
+font-weight: normal;
+}
+
+select {
+font-family: arial, verdana,  helvetica, sans-serif;
+font-size:11px;
+color:black;
+font-weight: normal;
+}
+
+textarea {
+font-family: arial, verdana,  helvetica, sans-serif;
+font-size:11px;
+color:black;
+font-weight: normal;
+}
+
+.normal {
+font-family: Verdana, arial, helvetica, sans-serif;
+font-size:12px;
+color:black;
+font-weight: normal;
+}
+
+.title {
+font-family: Verdana, arial, helvetica, sans-serif;
+font-size:15px;
+border:0px;
+color:#5B858D;
+font-weight: bold;
+}
+
+.paging{
+    color: #5B858D;
+    font-size: 12px;
+    font-family: Arial, Verdana, Trebuchet MS;	
+    font-weight: bold;
+    text-decoration:none;	
+}
+.paging_left{
+    color: #5B858D;
+    font-size: 12px;
+    font-family: Arial, Verdana, Trebuchet MS;	
+    text-align:left;	
+    font-weight: bold;
+    text-decoration:none;	
+}
+.paging_hit{
+    color: black;
+    font-size: 12px;
+    font-family: Arial, Verdana, Trebuchet MS;	
+    text-align:center;	
+    font-weight: bold;
+    text-decoration:underline;	
+}
+

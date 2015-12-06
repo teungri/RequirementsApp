@@ -1,0 +1,83 @@
+-----------------
+Instalation guide
+-----------------
+
+---Requirements:
+
+MySQL Version >= 4
+SMTP server (default configurations)
+PHP Version >= 4.0
+PHP Version >= 5.0 for dompdf-0.5.1 creating PDFs and php_writeexcel-0.3.0 for Excel generation
+PHP libraries for dompdf-0.5.1 (if not working):
+ - php-xml (http://keithdevens.com/software/phpxml)
+ - php-xmlrpc (http://phpxmlrpc.sourceforge.net/)
+
+
+---Install----
+
+1. Copy all the files from the zip. 
+2. Install using the file install.php
+3. Set the parameters in ini/params.php
+4. Login to the main site and Admin page using 
+username:admin
+password:adminreqheap
+
+or 
+---Manual Install:
+
+1. Copy all the files from the zip.
+If missing create the following folders in root and give them read and write permissions:
+-img (image folder/FCKEditor should save into)
+-img/File (image folder/FCKEditor should save files into)
+-img/Flash (image folder/FCKEditor should save flashes into)
+-img/Image (image folder/FCKEditor should save images into)
+-ini (configuration files)
+-ini/bkp (for backuping of the configuration files)
+-ini/lng (language files)
+-ini/lng/bkp (for backuping of the language files)
+-ini/txts (dropdown files)
+-ini/txts/bkp (for backuping of the dropdown files)
+-RSS (for creation of RSS feeds)
+
+2.Create a DB using the file 'reqheap.sql'.
+Set the connection to the DB in the file 'admin/inc/conn.php':
+$db="reqheap";  //DB name
+$link=mysql_connect("localhost","root","");  //host, username, password
+
+3.Set the parameters in ini/params.php
+
+4.Login to the main site and Admin page using 
+username:admin
+password:adminreqheap
+
+---Admin Page
+
+1. Using the Admin page all texts in the site can be modified in 4 languages
+2. New admin users can be created
+3. The list of site paramaters can be modified
+
+---PDFs generation
+Folder scripts: dompdf-0.5.1/
+Uses PHP5 only!
+PDFs settings can be modified in file pdf.php:  (documentation- dompdf-0.5.1/readme.txt)
+-name of output file
+-paper
+-orientation: portrait/landscape
+
+---Excel generation: (documentation- phpExcel - install.txt)
+Folder scripts: xls/
+Uses > PHP 5.2!
+Custom file for xls generation: xls.php
+
+---DHTML tree : (documentation- dhtmlxTree/readme.txt - README)
+Folder scripts: dhtmlxTree/
+Provides graphic functionality for moving tree with nodes.
+
+---Diagnostics
+
+Using the file install/diagnostics.php you can do the following:
+* test the db connection
+* test the integrity of the database
+* test the user rights in each folder that reqheap is using.
+* Give statistics about the projects, users and requirements in the database.
+
