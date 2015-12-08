@@ -21,17 +21,52 @@
 //
 // Page: "Top part of the site"
 
-if ($_SESSION['projects']=="") $_SESSION['projects']=0;
-if ($p_switch!="" && $project_id!="") $_SESSION['projects']=$project_id;
-
-if ($_SESSION['rights']=="") $query_project="select p_name, p_id from projects where p_status=1 order by p_name asc";
-elseif ($_SESSION['rights']=="0" || $_SESSION['rights']=="1" || $_SESSION['rights']=="2" || $_SESSION['rights']=="3") $query_project="select distinct(p.p_id), p.p_name from projects p left outer join project_users pu on p.p_id=pu.pu_p_id where (pu.pu_u_id=".$_SESSION['uid']." or p.p_status=1) order by p.p_name asc";
-elseif ($_SESSION['rights']=="4") $query_project="select distinct(p.p_id), p.p_name from projects p left outer join project_users pu on p.p_id=pu.pu_p_id where (pu.pu_u_id=".$_SESSION['uid']." or p_leader=".$_SESSION['uid']." or  p.p_status=1) order by p_name asc";
-else $query_project="select p_name, p_id from projects where p_status<>2 order by p_name asc";
+if ($_SESSION['projects']=="")
+{
+    $_SESSION['projects']=0;
+}
+if ( ! isset($p_switch) )
+{
+    $p_switch = "";
+}
+if ($p_switch!="" && $project_id!="")
+{
+    $_SESSION['projects']=$project_id;
+}
+if ( ! isset($_SESSION['rights']) )
+{
+    $_SESSION['rights'] = "";
+}
+if ($_SESSION['rights']=="")
+{
+    $query_project="select p_name, p_id from projects where p_status=1 order by p_name asc";
+}
+elseif ($_SESSION['rights']=="0" || $_SESSION['rights']=="1" || $_SESSION['rights']=="2" || $_SESSION['rights']=="3") 
+{
+    $query_project="select distinct(p.p_id), p.p_name from projects p left outer join project_users pu on p.p_id=pu.pu_p_id where (pu.pu_u_id=".$_SESSION['uid']." or p.p_status=1) order by p.p_name asc";
+}
+elseif ($_SESSION['rights']=="4") 
+{
+    $query_project="select distinct(p.p_id), p.p_name from projects p left outer join project_users pu on p.p_id=pu.pu_p_id where (pu.pu_u_id=".$_SESSION['uid']." or p_leader=".$_SESSION['uid']." or  p.p_status=1) order by p_name asc";
+}
+else 
+{
+    $query_project="select p_name, p_id from projects where p_status<>2 order by p_name asc";
+}
 $rs = mysql_query($query_project) or die(mysql_error());
 
-if ($viewalltype=="tree" && $_SESSION['projects']!=0) $_SESSION['_viewalltype']=0;
-elseif ($viewalltype=="normal" || $_SESSION['projects']==0) $_SESSION['_viewalltype']=1;
+if ( ! isset($viewalltype) )
+{
+    $viewalltype = "normal";
+}
+if ($viewalltype=="tree" && $_SESSION['projects']!=0) 
+{
+    $_SESSION['_viewalltype']=0;
+}
+elseif ($viewalltype=="normal" || $_SESSION['projects']==0)
+{
+    $_SESSION['_viewalltype']=1;
+}
 ?>
 <table border="0" cellpadding="2" cellspacing="0" class="topMenu" width="100%">
   <tr>
