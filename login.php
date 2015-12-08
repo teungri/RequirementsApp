@@ -21,30 +21,35 @@
 //
 // Page: "Login" - user's login
 
-if ($u_username!="")
- {
-  //deleting all old records from tree history
-  $query="delete from tree_history where th_date<DATE_SUB(now(), INTERVAL 1 HOUR);";
-  mysql_query($query) or die(mysql_error());
- 
-  $query="select * from users where u_username='".escapeChars($u_username)."' and u_password='".pw($u_password)."'";
-  $rs = mysql_query($query) or die(mysql_error());
-  if($row=mysql_fetch_array($rs))
-   {
-    $_SESSION['uid']=$row['u_id'];
-    $_SESSION['email']=$row['u_email'];
-    $_SESSION['username']=stripslashes($row['u_username']);
-    $_SESSION['name']=stripslashes($row['u_name']);
-    $_SESSION['rights']=$row['u_rights'];
-    if (strstr($_SESSION['http_ref'],"lost_password")) header("Location:index.php");
-    elseif ($_SESSION['http_ref']!="") header("Location:index.php?".$_SESSION['http_ref']);
-    else header("Location:index.php");
-   } 
-  else $tmp="<br><br><span class='error'>".$lng[5][6]."</span>";
- 
- }
+if ( ! isset($u_username) ) {
+    $u_username = ""; 
+}
+if ($u_username != "") {
+    //deleting all old records from tree history
+    $query = "delete from tree_history where th_date<DATE_SUB(now(), INTERVAL 1 HOUR);";
+    mysql_query($query) or die(mysql_error());
+
+    $query = "select * from users where u_username='" . escapeChars($u_username) . "' and u_password='" . pw($u_password) . "'";
+    $rs = mysql_query($query) or die(mysql_error());
+    if ($row = mysql_fetch_array($rs)) {
+        $_SESSION['uid'] = $row['u_id'];
+        $_SESSION['email'] = $row['u_email'];
+        $_SESSION['username'] = stripslashes($row['u_username']);
+        $_SESSION['name'] = stripslashes($row['u_name']);
+        $_SESSION['rights'] = $row['u_rights'];
+        if (strstr($_SESSION['http_ref'], "lost_password")) {
+            header("Location:index.php");
+        } elseif ($_SESSION['http_ref'] != "") {
+            header("Location:index.php?" . $_SESSION['http_ref']);
+        } else {
+            header("Location:index.php");
+        }
+    } else {
+        $tmp = "<br><br><span class='error'>" . $lng[5][6] . "</span>";
+    }
+}
 ?>
-<?if ($lp=="yes") echo "<br><span class='error'>".$lng[7][4]."</span><br><br>";?>
+<? if ( ! isset($lp) ) { $lp = "yes"; } if ($lp=="yes") echo "<br><span class='error'>".$lng[7][4]."</span><br><br>";?>
 <table border="0">
   <tr valign="top">
     <td>
@@ -74,7 +79,7 @@ if ($u_username!="")
   </tr>
 </table>
 <a href="index.php?inc=register"><?=$lng[5][4]?></a> | <a href="index.php?inc=lost_password"><?=$lng[5][5]?></a>
-<?=$tmp?>
+<??>
 
 <?
 //news section
@@ -83,6 +88,7 @@ include("ini/txts/".$_SESSION['chlang']."/news.php");
 $paging=NUMBER_OF_NEWS_SHOWN;
 $cnt=0;
 $all_count=count($news_array);
+if ( ! isset($from) ) $from = "";
 if ($from=="") $from=0; 
 if ($from+$paging>$all_count) $cnt2=$all_count;
 else $cnt2=$from+$paging;
@@ -113,17 +119,17 @@ for ($i=($all_count-1);$i>=0;$i--) {$news_array2[$cnt3]=$news_array[$i];$cnt3++;
   <? 
    }
   
-//displaying paging list
-if ($all_count>$paging && $cnt!=0) 
- {
-  $j=ceil($all_count/$paging);
-  for ($i=0,$tmp_c=0;$i<$j;$i++,$tmp_c++) 
-   {
-    if ($i*$paging==$from) $tmp_paging.=($i+1)." &nbsp;";	
-    else $tmp_paging.="<a href=# onclick='subm_paging(".($i*$paging).");return false;'>".($i+1)."</a> &nbsp;";
-   } 
-  $tmp_paging=substr($tmp_paging,0,strlen($tmp_paging)-1);
- }  
+   //displaying paging list
+   if ($all_count>$paging && $cnt!=0) {
+        $j=ceil($all_count/$paging);
+        if ( ! isset($tmp_paging) ) $tmp_paging = "";
+        for ($i=0,$tmp_c=0;$i<$j;$i++,$tmp_c++) 
+        {
+            if ($i*$paging==$from) $tmp_paging.=($i+1)." &nbsp;";	
+            else $tmp_paging.="<a href=# onclick='subm_paging(".($i*$paging).");return false;'>".($i+1)."</a> &nbsp;";
+        } 
+        $tmp_paging=substr($tmp_paging,0,strlen($tmp_paging)-1);
+   }  
 ?>  
  <? if ($cnt>0 && $tmp_paging!=""){?>
 <tr align=left>

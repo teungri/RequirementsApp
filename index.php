@@ -28,6 +28,7 @@ include ("admin/inc/func.php");//include functions file
 include ("ini/params.php");//include configuration file
 
 //setting referer if not logged
+if ( ! isset($_SESSION['uid']) ) $_SESSION['uid'] = "";
 if ($_SESSION['uid']=="" && $_SERVER['QUERY_STRING']!="" && !strstr($_SERVER['QUERY_STRING'],'login'))
 {
  $_SESSION['http_ref']=$_SERVER['QUERY_STRING'];
@@ -35,6 +36,7 @@ if ($_SESSION['uid']=="" && $_SERVER['QUERY_STRING']!="" && !strstr($_SERVER['QU
 
 
 //default language
+if ( !isset($_chlang) ) $_chlang = "";
 if ($_chlang!="") $_SESSION['chlang']=$_chlang;
 if (!$_SESSION['chlang']) $_SESSION['chlang']="en";
 
