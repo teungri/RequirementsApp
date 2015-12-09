@@ -94,6 +94,7 @@ function is_utf82($string) {
 //check if logged
 if (!($_SESSION['rights']=="4" || $_SESSION['rights']=="5")) header("Location:index.php");
 
+if ( ! isset($_FILES['file1']['tmp_name']) ) $_FILES['file1']['tmp_name'] = "";
 if (is_uploaded_file($_FILES['file1']['tmp_name']))
  {
   $tmp=""; 
@@ -271,7 +272,7 @@ if (is_uploaded_file($_FILES['file1']['tmp_name']))
    }
  }
 ?>
-<?if ($tmp!="") echo $tmp."<br>";?>
+<?if ( ! isset($tmp) ) $tmp = "";if ($tmp!="") echo $tmp."<br>";?>
 <table border="0" width="73%">
   <tr valign="top">
     <td>

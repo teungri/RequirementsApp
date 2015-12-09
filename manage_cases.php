@@ -24,7 +24,7 @@
 //check if logged
 if (!($_SESSION['rights']=="1" || $_SESSION['rights']=="2" || $_SESSION['rights']=="3" || $_SESSION['rights']=="4" || $_SESSION['rights']=="5")) header("Location:index.php");
 
-if ($order=="") $order="c_name asc"; 
+if ( !isset($order) || $order=="") $order="c_name asc"; 
 $query2="select  * from cases order by ".$order;
 $rs2 = mysql_query($query2) or die(mysql_error());
 	    
@@ -40,7 +40,7 @@ $rs2 = mysql_query($query2) or die(mysql_error());
 	  <tr class="gray">
 	    <td align="center"><a href="#" onclick="document.forms['f'].order.value='c_id <?if ($order=='c_id asc') echo "desc";else echo "asc";?>';document.forms['f'].submit();"><b><?=$lng[29][1]?></b></a></td>
 	    <td align="center" title="<?=$lng[29][6]?>"><a href="#" onclick="document.forms['f'].order.value='c_name <?if ($order=='c_name asc') echo "desc";else echo "asc";?>';document.forms['f'].submit();"><b><?=$lng[29][2]?></b></a></td>
-	    <?if ($c_view) {?>
+	    <?if ( ! isset($c_view) ) $c_view = 0; if ($c_view) {?>
 	    <td align="center" title="<?=$lng[29][7]?>"><a href="#" onclick="document.forms['f'].order.value='c_desc <?if ($order=='c_desc asc') echo "desc";else echo "asc";?>';document.forms['f'].submit();"><b><?=$lng[29][3]?></b></a></td>
 	    <td align="center" title="<?=$lng[29][8]?>"><a href="#" onclick="document.forms['f'].order.value='c_result <?if ($order=='c_result asc') echo "desc";else echo "asc";?>';document.forms['f'].submit();"><b><?=$lng[29][4]?></b></a></td>
 	    <?}?>

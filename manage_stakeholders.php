@@ -24,7 +24,7 @@
 //check if logged
 if (!($_SESSION['rights']=="5")) header("Location:index.php");
 
-if ($order=="") $order="s_name asc"; 
+if ( ! isset($order) || $order=="") $order="s_name asc"; 
 $query2="select  s.*, ps.ps_p_id from stakeholders s left outer join project_stakeholders ps on s.s_id=ps.ps_s_id group by s.s_id order by ".$order;
 $rs2 = mysql_query($query2) or die(mysql_error());
 	    

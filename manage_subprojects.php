@@ -24,7 +24,7 @@
 //check if logged
 if ($_SESSION['rights']!="5") header("Location:index.php");
 
-if ($order=="") $order="s.s_name asc"; 
+if ( ! isset($order) || $order=="") $order="s.s_name asc"; 
 //$query="select s.*, p.p_id, p.p_name from subprojects s left outer join projects p on s.s_p_id=p.p_id and p.p_id in (".$project_list.") order by ".$order;
 $query="select s.*, p.p_id, p.p_name from subprojects s left outer join projects p on s.s_p_id=p.p_id order by ".$order;
 $rs = mysql_query($query) or die(mysql_error());

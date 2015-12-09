@@ -24,7 +24,7 @@
 //check if logged
 if (!($_SESSION['rights']=="1" || $_SESSION['rights']=="2" || $_SESSION['rights']=="3" || $_SESSION['rights']=="4" || $_SESSION['rights']=="5")) header("Location:index.php");
 
-if ($order=="") $order="c_name asc"; 
+if ( ! isset($order) || $order=="") $order="c_name asc"; 
 $query2="select  c.*, pco.pco_p_id from components c left outer join project_components pco on c.c_id=pco.pco_c_id group by c.c_id order by ".$order;
 $rs2 = mysql_query($query2) or die(mysql_error());
 	    

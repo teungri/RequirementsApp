@@ -25,7 +25,7 @@
 
 if ($_SESSION['rights']!="5") header("Location:index.php");
 
-if ($order=="") $order="u_name asc"; 
+if ( ! isset($order) || $order=="") $order="u_name asc"; 
 $query="select * from users order by ".$order;
 $rs = mysql_query($query) or die(mysql_error());
 ?>

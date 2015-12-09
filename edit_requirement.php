@@ -23,7 +23,7 @@
 
 //check if logged
 if (!($_SESSION['rights']=="1" || $_SESSION['rights']=="2" || $_SESSION['rights']=="3" || $_SESSION['rights']=="4" || $_SESSION['rights']=="5")) header("Location:index.php");
-
+if ( ! isset($r_id) ) $r_id = "";
 if ($r_id!="")
  {
   //authorization check
@@ -33,8 +33,10 @@ if ($r_id!="")
   else header("Location:index.php");
  }
 
+if ( ! isset($r_pos) ) $r_pos = "";
 if ($r_pos=="") $r_pos=0;
  
+if ( ! isset($action) ) $action = "";
 if ($action=="delete" && $r_id!="")
  {
   $query="select * from requirements where r_parent_id=".$r_id;
@@ -70,6 +72,7 @@ if ($action=="delete" && $r_id!="")
 
 //if new keywors added
 $kw_ids="";
+if ( ! isset($new_keywords) ) $new_keywords = "";
 if ($new_keywords!="")
  {
   $kw_arr=explode(",",$new_keywords);
@@ -275,7 +278,8 @@ else
     if ($ref=="long") header("Location:index.php?inc=view_requirement_long&r_id=".$r_id);
    }
  }
-  
+ 
+if ( ! isset($tmp_p_id) ) $tmp_p_id = ""  ; 
 if ($r_id!="" && $tmp_p_id=="") 
  {
   $query="select r.*, p.p_status, p.p_req_del, date_format(r.r_creation_date, '%d.%m.%Y %H:%i') as d1, date_format(r.r_change_date, '%d.%m.%Y %H:%i') as d2, date_format(r.r_accept_date, '%d.%m.%Y %H:%i') as d3, u.u_name from requirements r left outer join users u on r.r_u_id=u.u_id left outer join projects p on r.r_p_id=p.p_id where r.r_id=".$r_id;
@@ -326,6 +330,12 @@ if ($r_id!="" && $tmp_p_id=="")
     $p_req_del=$row['p_req_del'];    
    }
  } 
+ if ( ! isset($r_pos) ) $r_pos = "";
+ if ( ! isset($r_p_id) ) $r_p_id = "";
+ if ( ! isset($r_p_id_tmp) ) $r_p_id_tmp = "";
+ if ( ! isset($r_s_id_tmp) ) $r_s_id_tmp = "";
+ if ( ! isset($r_assigned_u_id_tmp) ) $r_assigned_u_id_tmp = "";
+ if ( ! isset($tmp) ) $tmp = "";
 if ($r_pos=="") $r_pos=0;
 if ($r_p_id=="") $r_p_id=0;
 if ($r_p_id_tmp=="") $r_p_id_tmp=0;
@@ -346,7 +356,8 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
 	  <tr class="gray">
 	    <td align="left"  title="<?=$lng[15][96]?>">
 	      <?if ($r_id=="") {?>
-	        <?if ($stub==0 || $stub=="") {?>
+          
+	        <?if ( ! isset($stub) ) $stub = "" ;if ($stub==0 || $stub=="") {?>
 	          <input type="button" value="<?=$lng[15][94]?>" onclick="document.location.href='index.php?inc=edit_requirement&stub=1'">&nbsp;
 	          <input type="button" value="<?=$lng[15][105]?>" onclick="document.location.href='index.php?inc=edit_requirement&stub=2'">
 	        <?}elseif ($stub==1) {?>
@@ -368,6 +379,7 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
 	        <?
 	        //projects list
 	        //if retired getting the project query from top.php
+            if ( ! isset($p_status) ) $p_status = "" ;
 	        if ($p_status==2) $query_project2=$query_project;
 	        else
 	         {
@@ -393,6 +405,8 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
       	      &nbsp;<?if ($p_status==2 && $r_p_id_tmp!=$tmp_p_id) {?><input type="button" value="<?=$lng[15][75]?>" onclick="document.location.href='index.php?inc=edit_requirement&r_id=<?=$r_id?>&action=clone&tmp_pr=<?=$tmp_p_id?>'"><?}?>
 	    </td>
 	  </tr>
+	  <?if (! isset($stub) ) $stub=0;?>
+	  <?if (! isset($r_stub) ) $r_stub=0;?>
 	  <?if (!($stub==2 || $r_stub==2)) {?>
 	  <tr class="light_blue" valign="top" title="<?=$lng[15][98]?>">
 	    <td align="right" nowrap>&nbsp;<?=$lng[15][97]?>&nbsp;:&nbsp;</td>
@@ -400,6 +414,7 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
 	      <select name="r_s_id">
 	      <option value='0'>--
 	    <?
+        if ( ! isset($tmp_p_id) ) $tmp_p_id = "";
 	    $query2="select * from subprojects where s_p_id='".$tmp_p_id."' order by s_name asc";
 	    $rs2 = mysql_query($query2) or die(mysql_error());
 	    while($row2=mysql_fetch_array($rs2))
@@ -497,6 +512,7 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
 	  <?}?>
 	  <tr class="blue" title="<?=$lng[15][53]?>">
 	    <td align="right" nowrap>&nbsp;<?=$lng[15][4]?>&nbsp;:&nbsp;</td>
+        <?if ( ! isset($r_name) )  $r_name=""; ?>
 	    <td>&nbsp;<input type="text" name="r_name" value="<?=$r_name?>" maxlength="90" size=90></td>
 	  </tr>  
 	  <tr class="light_blue" title="<?=$lng[15][54]?>">
@@ -523,6 +539,7 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
      		 }
 	        
 	        //requirements list
+            if ( ! isset($add_q) ) $add_q = "";
 	        if ($r_id!="") $add_q.=" and r_id not in (".$arrs.") and r_id<>".$r_id;
 	        if ($tmp_p_id!="") $add_q.=" and r_p_id=".$tmp_p_id;
 	        $query2="select r_name, r_id from requirements where 1=1 ".$add_q." order by r_name asc";
@@ -574,6 +591,7 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
 	        
 	          while($row4=mysql_fetch_array($rs4)) 
 		   {
+            if ( ! isset($r_assigned_u_id) ) $r_assigned_u_id = "";
 		    if ($row4['u_id']==$r_assigned_u_id) echo "<option value='".$row4['u_id']."' selected>".htmlspecialchars($row4['u_name']);
 		    else echo "<option value='".$row4['u_id']."'>".htmlspecialchars($row4['u_name']);
 		   }
@@ -589,6 +607,7 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
 	  <tr class="blue" valign="top" title="<?=$lng[15][57]?>">
 	    <td align="right" nowrap>&nbsp;<?=$lng[15][5]?>&nbsp;:&nbsp;</td>
 	    <td align="left"><? 
+            if ( ! isset($ta) ) $ta = "";
 		include("FCKeditor/fckeditor.php");
 		$oFCKeditor = new FCKeditor('ta') ;
 		$oFCKeditor->BasePath = 'FCKeditor/' ;
@@ -626,6 +645,12 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
 	   {
 	    $cnt_u++;
 	    $tmp_var="r_userfield".$cnt_u;
+        if ( ! isset($r_userfield1) ) $r_userfield1 = "" ;
+        if ( ! isset($r_userfield2) ) $r_userfield2 = "" ;
+        if ( ! isset($r_userfield3) ) $r_userfield3 = "" ;
+        if ( ! isset($r_userfield4) ) $r_userfield4 = "" ;
+        if ( ! isset($r_userfield5) ) $r_userfield5 = "" ;
+        if ( ! isset($r_userfield6) ) $r_userfield6 = "" ;
 	    $r_userfield=htmlspecialchars($$tmp_var);
 	    if ($row41['uf_name_en']!="")
 	     {
@@ -808,6 +833,11 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
 	  </tr>
 	  <tr class="blue" title="<?=$lng[15][61]?>">
 	    <td align="right" nowrap>&nbsp;<?=$lng[15][14]?>&nbsp;:&nbsp;</td>
+        <?if ( ! isset($r_link) )  $r_link = ""?>
+        <?if ( ! isset($r_risk) )  $r_risk = ""?>
+        <?if ( ! isset($r_complexity) )  $r_complexity = ""?>
+        <?if ( ! isset($r_source) )  $r_source = ""?>
+        <?if ( ! isset($r_points) )  $r_points = ""?>
 	    <td><input type="text" name="r_link" value="<?=$r_link?>" size=90><br/><?=$lng[15][46]?></td>
 	  </tr> 
 	  <tr class="light_blue" title="<?=$lng[15][62]?>">
@@ -865,6 +895,7 @@ if ($r_assigned_u_id_tmp!="") $r_assigned_u_id=$r_assigned_u_id_tmp;
 	  </tr>  
 	  <tr class="light_blue" title="<?=$lng[15][89]?>">
 	    <td align="right" nowrap>&nbsp;<?=$lng[15][88]?>&nbsp;:&nbsp;</td>
+        <?if ( ! isset($r_weight) )  $r_weight = ""?>
 	    <td>&nbsp;<input type="text" name="r_weight" value="<?=$r_weight?>" maxlength="10" size=2></td>
 	  </tr>  
 	  <tr class="blue" title="<?=$lng[15][66]?>">

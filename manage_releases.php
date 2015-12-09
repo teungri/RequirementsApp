@@ -24,7 +24,7 @@
 //check if logged
 if (!($_SESSION['rights']=="3" || $_SESSION['rights']=="4" || $_SESSION['rights']=="5")) header("Location:index.php");
 
-if ($order=="") $order="r_name asc"; 
+if ( ! isset($order) || $order=="") $order="r_name asc"; 
 $query2="select  r.*, pr.pr_p_id, date_format(r_date, '%d.%m.%Y') as d1, date_format(r_released_date, '%d.%m.%Y') as d2 from releases r left outer join project_releases pr on r.r_id=pr.pr_r_id group by r.r_id order by ".$order;
 $rs2 = mysql_query($query2) or die(mysql_error());
 	    

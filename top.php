@@ -68,6 +68,7 @@ elseif ($viewalltype=="normal" || $_SESSION['projects']==0)
     $_SESSION['_viewalltype']=1;
 }
 ?>
+<? if ( ! isset($inc) ) $inc="view_all";?>
 <table border="0" cellpadding="2" cellspacing="0" class="topMenu" width="100%">
   <tr>
     <td>

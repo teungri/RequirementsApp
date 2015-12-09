@@ -23,7 +23,7 @@
 
 include("ajax.php");
 include("ini/txts/".$_SESSION['chlang']."/state.php");
-
+if ( ! isset($action) ) $action = "";
 if ($action=="undo")
  {
   $query22="select count(*), th_current from tree_history where th_u_id=".$_SESSION['uid']." and th_p_id=".$_SESSION['projects']." and th_date>=DATE_SUB(now(), INTERVAL 1 HOUR) group by th_current";
@@ -188,7 +188,7 @@ if ($action=="update" && $ids!="" && ($r_assigned_u_id!="" || $r_p_id!="" || $r_
    }   
   }
 ?>
-<?if ($tmp!="") echo $tmp;?>
+<?if ( ! isset($tmp) ) $tmp = ""; if ($tmp!="") echo $tmp;?>
 <?
 //if tree view
 if ($_SESSION['_viewalltype']==0) 
@@ -856,6 +856,7 @@ else //if normal view selected
 		<option value="">--
 		<?//state list	        
 	          include("ini/txts/".$_SESSION['chlang']."/state.php");
+              if ( ! isset($r_state) ) $r_state="";
 		  echo makeSelect($state_array,$r_state);
 	        ?>
 	     </select>
@@ -890,7 +891,7 @@ else //if normal view selected
 		//users list
 		$query4="select u_name, u_id from users where u_rights in (0,1,2,3,4,5) order by u_name asc";
 		$rs4 = mysql_query($query4) or die(mysql_error());
-		        
+		if ( ! isset($filter6) ) $filter6="";
 		while($row4=mysql_fetch_array($rs4)) 
 		 {
 		  if ($row4['u_id']==$filter6) echo "<option value='".$row4['u_id']."' selected>".htmlspecialchars($row4['u_name']);
@@ -1008,7 +1009,7 @@ else //if normal view selected
 		       </script>
 		  </td>   
 		  <td>  	    
-	             &nbsp;&nbsp;<img src="x.gif" width=8 height=1><?=$lng[17][53]?>&nbsp;<input type="radio" name="filter12" value="<?=$lng[17][53]?>" <?if ($filter12=="" || $filter12==$lng[17][53]) echo "checked";?>>
+	             &nbsp;&nbsp;<img src="x.gif" width=8 height=1><?=$lng[17][53]?>&nbsp;<input type="radio" name="filter12" value="<?=$lng[17][53]?>" <?if ( ! isset($filter12) ) $filter12=""; if ($filter12=="" || $filter12==$lng[17][53]) echo "checked";?>>
 	          </td>
 	          <td rowspan="2">  	    
 			     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=$lng[17][55]?>: 
@@ -1034,6 +1035,7 @@ else //if normal view selected
 			$query4="select u_name, u_id from users order by u_name asc";
 			$rs4 = mysql_query($query4) or die(mysql_error());
 			        
+		    if ( ! isset($filter14) ) $filter14="";
 			while($row4=mysql_fetch_array($rs4)) 
 			 {
 			  if ($row4['u_id']==$filter14) echo "<option value='".$row4['u_id']."' selected>".htmlspecialchars($row4['u_name']);
@@ -1054,6 +1056,7 @@ else //if normal view selected
 	 </tr>
 	 <tr>
 	   <td align="left" class="gray" nowrap valign="top">
+           <? if ( ! isset($filter15_3) ) $filter15_3 = ""; if ( ! isset($filter15_1) ) $filter15_1 = ""; if ( ! isset($filter15_2) ) $filter15_2 = ""; if ( ! isset($filter5) ) $filter5 = "";?>
 	            &nbsp;&nbsp;<?=$lng[17][73]?>: <input type="text" size=2 name="filter15_3" value="<?=stripslashes(htmlspecialchars($filter15_3))?>"> <?=$lng[17][83]?> <input type="text" size=2 name="filter15_1" value="<?=stripslashes(htmlspecialchars($filter15_1))?>">(<?=$lng[17][74]?>) <input type="text" size=2 name="filter15_2" value="<?=stripslashes(htmlspecialchars($filter15_2))?>">(<?=$lng[17][75]?>)
 
 	            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=$lng[17][18]?>: <input type="text" size=30 name="filter5" value="<?=stripslashes(htmlspecialchars($filter5))?>">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" onclick="if (!sub_search()) return false;" value="<?=$lng[17][17]?>">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="document.location.href='index.php?inc=view_all'" value="<?=$lng[17][79]?>">
@@ -1074,18 +1077,39 @@ else //if normal view selected
 	  <?
 	    $query="select count(*) from requirements where r_p_id in (".$project_list.")";
 	    $rs = mysql_query($query) or die(mysql_error());
+        if ( ! isset($all_reqs) ) $all_reqs="";
 	    if($row=mysql_fetch_array($rs)) $all_reqs.=$row[0];
 
 
 
-	  //sortable columns
-          if ($order=="") $order="r_change_date desc";
+	    //sortable columns
+        if ( ! isset($order) ) $order="";
+        if ($order=="") $order="r_change_date desc";
 
-	  //search
-	  if ($filter1!="") $search.=" and r.r_u_id=".$filter1;
-	  if ($filter2!="") $search.=" and r.r_state=".$filter2;
-	  if ($filter4!="") $search.=" and r.r_priority=".$filter4;
-	  if ($filter5!="") 
+	    //search
+        if ( ! isset($order) ) $order="";
+        if ( ! isset($filter1) ) $filter1="";
+        if ( ! isset($filter2) ) $filter2="";
+        if ( ! isset($filter3) ) $filter3="";
+        if ( ! isset($filter4) ) $filter4="";
+        if ( ! isset($filter5) ) $filter5="";
+        if ( ! isset($filter6) ) $filter6="";
+        if ( ! isset($filter7) ) $filter7="";
+        if ( ! isset($filter8) ) $filter8="";
+        if ( ! isset($filter9) ) $filter9="";
+        if ( ! isset($filter10) ) $filter10="";
+        if ( ! isset($filter11) ) $filter11="";
+        if ( ! isset($filter12) ) $filter12="";
+        if ( ! isset($filter13) ) $filter13="";
+        if ( ! isset($filter14) ) $filter14="";
+        if ( ! isset($filter15_1) ) $filter15_1="";
+        if ( ! isset($filter15_2) ) $filter15_2="";
+        if ( ! isset($filter15_3) ) $filter15_3="";
+        if ( ! isset($filter18) ) $filter18="";
+        if ($filter1!="") $search.=" and r.r_u_id=".$filter1;
+	    if ($filter2!="") $search.=" and r.r_state=".$filter2;
+	    if ($filter4!="") $search.=" and r.r_priority=".$filter4;
+	    if ($filter5!="") 
 	   {
 	    $query4="select * from comments where c_text like('%".escapeChars($filter5)."%')";
 	    $rs4 = mysql_query($query4) or die(mysql_error());
@@ -1175,11 +1199,14 @@ else //if normal view selected
 	  if ($filter18!="") $search.=" and CONCAT(',',r.r_c_id) like ('%,".$filter18.",%')"; 
 
 	  //paging query, number of results (from the param.php file) per page displayed
+      if ( ! isset($search) ) $search="";
 	  $paging=$PPAGE;
 	  $query="select count(*) from requirements r left outer join projects p on r.r_p_id=p.p_id where r.r_p_id in (".$project_list.")".$search;
 	  // echo $query;
 	  $rs = mysql_query($query) or die(mysql_error());
 	  if($row=mysql_fetch_array($rs)) $all_count=$row[0];
+      if ( ! isset($from) ) $from="";
+      if ( ! isset($check_all) ) $check_all=1;
 	  if ($from=="") $from=0; 
 	  if ($from+$paging>$all_count) $cnt2=$all_count;
 	  else $cnt2=$from+$paging;
@@ -1385,7 +1412,7 @@ if ($all_count>$paging && $cnt!=0)
    <td align=left valign=top>
    <?=$lng[17][37]?>:&nbsp;<br>
    <select name="r_assigned_u_id">
-      <option value='' <?if ($r_assigned_u_id=="") echo "selected";?>><?=$lng[17][26]?>
+      <option value='' <?if ( ! isset($r_assigned_u_id) ) $r_assigned_u_id=""; if ($r_assigned_u_id=="") echo "selected";?>><?=$lng[17][26]?>
       <option value='0' <?if ($r_assigned_u_id=="0") echo "selected";?>><?=$lng[17][27]?>
 	<?
 	//users list
@@ -1439,6 +1466,7 @@ if ($all_count>$paging && $cnt!=0)
     </td>
     <td align=left valign=top>
     <?=$lng[17][41]?>:&nbsp;<br>
+    <? if ( ! isset($r_source) ) $r_source=""; ?>
     <input type="text" name="r_source" value="<?=$r_source?>">
     </td>
     </tr>

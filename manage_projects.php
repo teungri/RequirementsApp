@@ -24,8 +24,9 @@
 //check if logged
 if ($_SESSION['rights']!="5") header("Location:index.php");
 
-if ($order=="") $order="p_name asc"; 
-if ($show_r=="1") $query="select p.*, date_format(p_date, '%d.%m.%Y') as d1, u_name, u_id from projects p left outer join users u on p.p_leader=u.u_id order by ".$order;
+if ( ! isset($order) || $order=="") $order="p_name asc"; 
+if ( ! isset($show_r) ) $show_r = 1;
+if ( $show_r=="1") $query="select p.*, date_format(p_date, '%d.%m.%Y') as d1, u_name, u_id from projects p left outer join users u on p.p_leader=u.u_id order by ".$order;
 else $query="select p.*, date_format(p_date, '%d.%m.%Y') as d1, u_name, u_id from projects p left outer join users u on p.p_leader=u.u_id where p_status<>2 order by ".$order;
 $rs = mysql_query($query) or die(mysql_error());
 ?>

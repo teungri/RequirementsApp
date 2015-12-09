@@ -23,7 +23,7 @@
 
 //check if logged
 if ($_SESSION['uid']=="" || $_SESSION['username']=="guest") header("Location:index.php");
-
+if ( ! isset($save) ) $save = "no";
 if ($save=="yes")
  {
   if ($u_password=="")
@@ -128,6 +128,7 @@ if($row=mysql_fetch_array($rs))
     </td> 	 
   </tr>
 </table>
+<?if ( ! isset($tmp) ) $tmp="";?>
 <?=$tmp?>
 <script>
 function sub()

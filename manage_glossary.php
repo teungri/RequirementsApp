@@ -24,7 +24,7 @@
 //check if logged
 if (!($_SESSION['rights']=="5")) header("Location:index.php");
 
-if ($order=="") $order="g_id asc"; 
+if ( ! isset($order) || $order=="") $order="g_id asc"; 
 $query2="select g.*, pg.pg_p_id from glossary g left outer join project_glossary pg on g.g_id=pg.pg_g_id group by g.g_id order by ".$order;
 $rs2 = mysql_query($query2) or die(mysql_error());
 	    

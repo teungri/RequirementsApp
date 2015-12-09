@@ -24,7 +24,7 @@
 //check if logged
 if (!($_SESSION['rights']=="1" || $_SESSION['rights']=="2" || $_SESSION['rights']=="3" || $_SESSION['rights']=="4" || $_SESSION['rights']=="5")) header("Location:index.php");
 
-if ($order=="") $order="k_name asc"; 
+if ( ! isset($order) || $order=="") $order="k_name asc"; 
 $query2="select * from keywords order by ".$order;
 $rs2 = mysql_query($query2) or die(mysql_error());
 	    
